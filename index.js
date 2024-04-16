@@ -2,9 +2,11 @@ const Eris = require("eris");
 const keep_alive = require('./keep_alive.js'); // Assuming this keeps your bot online
 
 // Replace TOKEN with your bot account's token (store securely using environment variables)
-require('dotenv').config(); // Load environment variables from a `.env` file
+require('env').config();
 
 const bot = new Eris(process.env.token);
+
+const channelId = '1220488067203338381'; // Replace with your actual channel ID
 
 async function joinVoiceChannel(channelId) {
   try {
@@ -48,12 +50,10 @@ async function joinVoiceChannel(channelId) {
   }
 }
 
-// Replace 1220488067203338381 with your actual channel ID
-const channelId = '1220488067203338381';
-
-// Ensure the bot is ready before attempting to join the voice channel
-bot.on('ready', () => {
-  joinVoiceChannel(channelId);
+bot.on('messageCreate', async (msg) => {
+  if (msg.content.toLowerCase() === '.joiny') {
+    joinVoiceChannel(channelId);
+  }
 });
 
 bot.on("error", (err) => {
