@@ -4,7 +4,7 @@ const keep_alive = require('./keep_alive.js'); // Assuming this keeps your bot o
 // Replace TOKEN with your bot account's token (store securely using environment variables)
 require('dotenv').config(); // Load environment variables from a `.env` file
 
-const bot = new Eris(process.env.TOKEN);
+const bot = new Eris(process.env.token);
 
 async function joinVoiceChannel(channelId) {
   try {
